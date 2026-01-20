@@ -20,7 +20,7 @@ public class QuestButton01 : MonoBehaviour
     public void acceptQuest()
     {
         //miniMap.SetActive(true);
-        //QuestManager.SubQuestNumber = 1;
+        //QuestManagerNEW.SubQuestNumber = 1;
         thePlayer.SetActive(true);
         noticeCam.SetActive(false);
         UIQuest.SetActive(false);
@@ -35,7 +35,7 @@ public class QuestButton01 : MonoBehaviour
         objectiv01.GetComponent<Text>().text = "Reach the clearing in the woods";
         objectiv02.GetComponent<Text>().text = "Open the chest";
         objectiv03.GetComponent<Text>().text = "Retrieve the weapon";
-        QuestManager.ActiveQuestNumber = 1;
+        QuestManagerNEW.ActiveQuestNumber = 1;
         yield return new WaitForSeconds(0.5f);
         activateQuestBox.SetActive(true);
         yield return new WaitForSeconds(1);
