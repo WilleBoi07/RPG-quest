@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Pmove : MonoBehaviour
 {
+    PlayerInteraction interaction;
+
     [Header("Movement")]
     public float walkSpeed = 4f;
     public float sprintSpeed = 7f;
@@ -21,6 +23,7 @@ public class Pmove : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        interaction = GetComponent<PlayerInteraction>();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -28,6 +31,9 @@ public class Pmove : MonoBehaviour
 
     void Update()
     {
+        if (interaction != null && interaction.inConversation)
+            return;
+
         HandleMouseLook();
         HandleMovement();
     }

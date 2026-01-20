@@ -3,29 +3,25 @@ using Game.Quests;
 
 public class QuestItem : MonoBehaviour
 {
+    public FetchQuest requiredQuest;
+
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("[QuestItem] Trigger entered by: " + other.name);
-
         if (!other.CompareTag("Player")) return;
 
         QuestManager questManager = other.GetComponent<QuestManager>();
+        if (questManager == null) return;
 
-        if (questManager == null)
+        if (questManager.currentQuest != requiredQuest || !questManager.questAccepted)
         {
-            Debug.LogError("[QuestItem] Player has no QuestManager");
+            Debug.Log("[QuestItem] Player cannot pick up this item (quest not accepted)");
             return;
         }
 
-        if (questManager.currentQuest == null)
-        {
-            Debug.LogWarning("[QuestItem] Player has no active quest");
-            return;
-        }
-
+        // Mark item as collected instead of completing quest
+        questManager.CollectItem();
         Debug.Log("[QuestItem] Quest item collected");
 
-        questManager.CompleteQuest();
         Destroy(gameObject);
     }
 }
